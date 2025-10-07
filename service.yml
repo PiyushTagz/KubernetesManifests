@@ -1,0 +1,12 @@
+kind: Service       # Defines to create Service type Object
+apiVersion: v1
+metadata: 
+    name: demoservice
+
+spec: 
+  ports:
+   - port: 80           # Service port maps to container port (VIP: Service port) 
+     targetPort: 80     # Containers port
+  selector:
+     name: deployment   # Apply this service to any manifest which has the specific label
+  type: NodePort          #ClusterIP       # Specifies the service configuration i.e. VIP/Cluster IP

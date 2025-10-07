@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myreplicaset
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      myname: piyush
+  template:
+    metadata:
+      labels:
+        myname: piyush
+    spec:
+      containers:
+        - name: c00
+          image: busybox
+          command: ["/bin/sh", "-c", "while true; do echo Hello-Piyush; sleep 5; done"]
+

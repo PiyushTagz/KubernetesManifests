@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: c1
+      image: centos:7
+      command: ["/bin/bash","-c","while true; do echo 'Container c1 is running'; sleep 1000; done"]               # while loop
+      volumeMounts:
+        - name: podvol              # Name of the volume that we have given in volumes section
+          mountPath: "/tmp/c1dir"   # folder inside c1 container to map to volume
+
+    - name: c2
+      image: centos:7         
+      command: ["/bin/bash","-c","while true; do echo 'Container c2 is running'; sleep 1000; done"]
+      volumeMounts:
+        - name: podvol              # Name of the volume that we have given in volumes section
+          mountPath: "/tmp/c2dir"   # folder inside c1 container to map to volume
+
+
+  volumes:
+    - name: podvol                  # Name of the volume that we have given
+      emptyDir: {}                  # Type of the volume
+

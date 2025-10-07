@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: mypod
+spec: 
+  containers:
+    - image: centos:7
+      name: c01
+      command: ["/bin/bash", "-c", "while true; do echo 'COntainer c01 is running'; sleep 1000 ; done"]
+      volumeMounts:
+        - mountPath: /tmp/contdir   # folder inside c01 container to map to volume
+          name: testvolume          # hostpath volume name
+
+  volumes: 
+    - name: testvolume              # hostpath volume name
+      hostPath:
+        path: /tmp/hostdir          # hostpath volume's directory on host
+
